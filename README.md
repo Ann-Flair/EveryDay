@@ -1,2 +1,2 @@
 # EveryDay
-java 算法 学习笔记 
+java | 算法 | 学习笔记 
