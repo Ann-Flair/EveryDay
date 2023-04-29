@@ -1,6 +1,6 @@
-# 题解
+## 题解
 
-、、、java
+``` java
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         // 法1.Arrays的类方法，对数组排序
