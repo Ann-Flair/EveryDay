@@ -1,1 +1,46 @@
-
+题解
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        // 法1.Arrays的类方法，对数组排序
+        Arrays.sort(nums);
+        return nums[nums.length - k];
+        // 法2.快速选择，每次只排序“一半”
+        int len = nums.length;
+        int index = len - k;//第K大元素的数组索引
+        int l = 0, h = len - 1;
+        while (l < h) {
+            int i = partition(nums, l, h);//i为每一次划分的枢轴
+            if (i == index) {
+                return nums[i];
+            } else if (i < index) {
+                l = i + 1;
+            } else {
+                h = i - 1;
+            }
+        }
+        return nums[index];
+        // 法3.堆排序
+        PriorityQueue<Integer> pq = new PriorityQueue<>(); // 小顶堆
+        for (int val : nums) {
+            pq.add(val);
+            if (pq.size() > k)  // 维护堆的大小为 K
+                pq.poll();
+        }
+        return pq.peek();
+    }
+    private int partition(int[] nums, int low, int high) {
+        int pivot = nums[low];
+        while (low < high) {
+            while (low < high && nums[high] >= pivot) {
+                high--;
+            }
+            nums[low] = nums[high];
+            while (low < high && nums[low] <= pivot) {
+                low--
+            }
+            nums[high] = nums[low];
+        }
+        nums[low] = pivot;
+        return low;
+    }
+}
